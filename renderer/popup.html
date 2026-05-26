@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title data-i18n="popup_note">桌面便签</title>
+  <link rel="stylesheet" href="popup.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+  <div class="popup-pane" id="popupPane">
+    <!-- 顶部栏 -->
+    <div class="popup-header" id="popupHeader">
+      <div class="popup-color-bar" id="colorBar"></div>
+      <input type="text" class="popup-title" id="popupTitle" data-i18n-placeholder="app_name" placeholder="标题">
+      <div class="popup-controls-top">
+        <button class="popup-btn close-btn" id="closeBtn" data-i18n-title="close" title="关闭">
+          <span class="icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 内容区 -->
+    <div class="popup-content" id="popupContent">
+      <textarea class="popup-textarea" id="popupTextarea" data-i18n-placeholder="app_name" placeholder="写下你的想法..."></textarea>
+    </div>
+
+    <!-- 底部工具栏 -->
+    <div class="popup-toolbar" id="popupToolbar">
+      <button class="reminder-btn" id="reminderBtn" data-i18n="reminder">🔔 提醒</button>
+      <span class="char-count" id="charCount">0/6行</span>
+      <div class="toolbar-right">
+        <button class="popup-btn color-btn" id="colorBtn" data-i18n-title="color_palette" title="颜色">
+          <span class="color-dot-icon" id="colorDotIcon"></span>
+        </button>
+        <button class="popup-btn size-btn" id="sizeBtn" data-i18n-title="size_toggle" title="切换尺寸">
+          <span class="icon"></span>
+        </button>
+        <button class="popup-btn pin-btn" id="pinBtn" data-i18n-title="pin_toggle" title="置顶">
+          <span class="icon pin-icon"></span>
+        </button>
+        <button class="popup-btn delete-btn" id="deleteBtn" data-i18n-title="delete" title="删除">
+          <span class="icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 折叠状态 -->
+    <div class="popup-collapsed" id="popupCollapsed" style="display:none;">
+      <span class="collapsed-title" id="collapsedTitle" data-i18n="untitled">无标题</span>
+    </div>
+
+    <!-- 颜色面板（小窗弹出） -->
+    <div class="popup-color-panel" id="popupColorPanel" style="display:none;">
+      <div class="popup-color-panel-content">
+        <div class="popup-color-panel-header">
+          <span data-i18n="color_palette">选择颜色</span>
+          <button class="popup-color-panel-close" id="popupColorPanelClose" data-i18n-title="close" title="关闭">✕</button>
+        </div>
+        <div class="popup-color-groups" id="popupColorGroups">
+          <!-- 动态生成 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 提醒设置弹窗 -->
+  <div class="reminder-modal" id="reminderModal" style="display:none;">
+    <div class="reminder-content">
+      <div class="reminder-header">
+        <h3 data-i18n="reminder_title">⏰ 设置提醒</h3>
+        <button class="reminder-close-btn" id="cancelReminder">✕</button>
+      </div>
+      
+      <div class="reminder-active-info" id="reminderActiveInfo" style="display:none;">
+        <div class="active-reminder-row">
+          <span class="active-reminder-icon">🔔</span>
+          <span class="active-reminder-time" id="activeReminderTime"></span>
+          <span class="active-reminder-repeat" id="activeReminderRepeat"></span>
+        </div>
+        <button class="btn-clear-reminder" id="clearReminder" data-i18n="clear_reminder">移除提醒</button>
+      </div>
+      
+      <div class="quick-options">
+        <span class="quick-label" data-i18n="quick_set">快捷设置</span>
+        <div class="quick-btns">
+          <button class="quick-btn" data-minutes="15" data-i18n="15min_later">15分钟后</button>
+          <button class="quick-btn" data-minutes="60" data-i18n="1hour_later">1小时后</button>
+          <button class="quick-btn" data-time="today-18" data-i18n="today_1800">今天 18:00</button>
+          <button class="quick-btn" data-time="tomorrow-9" data-i18n="tomorrow_0900">明天 09:00</button>
+          <button class="quick-btn" data-time="dayafter-9" data-i18n="day_after_0900">后天 09:00</button>
+          <button class="quick-btn" data-time="next-monday-9" data-i18n="next_monday_0900">下周一 09:00</button>
+        </div>
+      </div>
+      
+      <div class="custom-time">
+        <span class="quick-label" data-i18n="custom_time">自定义时间</span>
+        <div class="custom-time-row">
+          <input type="date" id="reminderDate" class="date-input">
+          <input type="time" id="reminderTime" class="time-input" value="09:00">
+        </div>
+      </div>
+      
+      <div class="repeat-options">
+        <span class="quick-label" data-i18n="repeat">重复</span>
+        <div class="repeat-btns">
+          <button class="repeat-btn active" data-repeat="none" data-i18n="none">不重复</button>
+          <button class="repeat-btn" data-repeat="daily" data-i18n="daily">每天</button>
+          <button class="repeat-btn" data-repeat="weekly" data-i18n="weekly">每周</button>
+          <button class="repeat-btn" data-repeat="monthly" data-i18n="monthly">每月</button>
+        </div>
+      </div>
+      
+      <div class="reminder-actions">
+        <button class="btn-save-reminder" id="saveReminder" data-i18n="set_reminder">保存提醒</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="theme-utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

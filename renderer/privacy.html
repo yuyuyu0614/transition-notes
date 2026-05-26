@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title data-i18n="privacy">隐私政策</title>
+  <link rel="stylesheet" href="privacy.css">
+  <script src="i18n.js"></script>
+</head>
+<body>
+  <div class="privacy-container">
+    <p class="privacy-text" data-i18n="privacy_text">Transition 变迁 不会收集、上传、分享您的任何便签内容。所有数据仅存储在您的设备本地。</p>
+    <div class="dont-show-again">
+      <label>
+        <input type="checkbox" id="dontShowAgain">
+        <span data-i18n="dont_show_again">不再显示</span>
+      </label>
+    </div>
+    <div class="privacy-footer"><span data-i18n="app_name">Transition 变迁</span> v1.0.0</div>
+    <button id="closePrivacyBtn" class="privacy-close-btn" data-i18n="close">关闭</button>
+  </div>
+  <script src="theme-utils.js"></script>
+  <script src="privacy.js"></script>
+</body>
+</html>
