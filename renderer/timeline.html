@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title data-i18n="timeline">时间线 - Transition</title>
+  <link rel="stylesheet" href="timeline.css">
+</head>
+<body>
+  <div class="glass-pane">
+    <div class="title-bar">
+      <div class="title-bar-drag"></div>
+      <span class="title-bar-text" data-i18n="timeline">时间线</span>
+      <div class="window-controls">
+        <button class="win-btn close" id="closeBtn" data-i18n-title="close" title="关闭">
+          <span class="icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search-box">
+        <input type="text" id="searchInput" data-i18n-placeholder="search" placeholder="搜索便签...">
+      </div>
+      <div class="filter-colors">
+        <span class="filter-label" data-i18n="color_palette">颜色筛选:</span>
+        <div class="filter-option active" data-color="" style="background:#888" title="" data-i18n-title="all"></div>
+        <div class="filter-colors-dynamic" id="filterColorsDynamic"></div>
+        <button class="filter-more-btn" id="filterMoreBtn" title="" data-i18n-title="more_colors">+</button>
+      </div>
+    </div>
+
+    <div class="timeline-content" id="timelineContent"></div>
+  </div>
+
+  <!-- 颜色筛选面板 -->
+  <div class="filter-color-panel" id="filterColorPanel" style="display:none;">
+    <div class="filter-color-panel-content">
+      <div class="filter-color-panel-header">
+        <span data-i18n="color_palette">颜色筛选</span>
+        <button class="filter-color-panel-close" id="filterColorPanelClose">✕</button>
+      </div>
+      <div class="color-groups" id="filterColorGroups"></div>
+    </div>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="theme-utils.js"></script>
+  <script src="timeline.js"></script>
+</body>
+</html>

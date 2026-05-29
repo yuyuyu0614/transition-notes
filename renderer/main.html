@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title data-i18n="app_name">Transition 变迁</title>
+  <link rel="stylesheet" href="main.css">
+<script src="i18n.js"></script>
+</head>
+<body>
+  <div class="glass-pane">
+    <!-- 标题栏 -->
+    <div class="title-bar">
+      <div class="title-bar-left">
+        <button class="title-btn avatar-btn" id="avatarBtn" title="" data-i18n-title="user">
+          <span class="avatar-icon"></span>
+        </button>
+        <button class="title-btn settings-btn" id="settingsBtn" data-i18n-title="settings" title="设置">
+          <span class="gear-icon"></span>
+        </button>
+        <button class="title-btn privacy-btn" id="privacyBtn" data-i18n-title="privacy" title="隐私政策">
+          <span class="privacy-icon">?</span>
+        </button>
+        <button class="title-btn about-btn" id="aboutBtn" data-i18n-title="about" title="关于">
+          <span class="about-icon">i</span>
+        </button>
+      </div>
+      <div class="title-bar-drag"></div>
+      <span class="title-bar-text" data-i18n="app_name">Transition 变迁</span>
+      <div class="title-bar-right">
+        <button class="win-btn minimize" id="minimizeBtn" data-i18n-title="minimize" title="最小化">
+          <span class="icon"></span>
+        </button>
+        <button class="win-btn maximize" id="maximizeBtn" data-i18n-title="maximize" title="最大化">
+          <span class="icon"></span>
+        </button>
+        <button class="win-btn close" id="closeBtn" data-i18n-title="close" title="关闭">
+          <span class="icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content">
+      <!-- 左侧便签列表 -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h2 data-i18n="app_name">便签列表</h2>
+          <button class="btn-new" id="newNoteBtn" data-i18n="new_note">+ 新建</button>
+        </div>
+        <div class="notes-list" id="notesList"></div>
+      </div>
+
+      <!-- 右侧编辑区 -->
+      <div class="editor">
+        <div class="editor-header">
+          <input type="text" id="noteTitle" class="editor-only title-input" data-i18n-placeholder="app_name" placeholder="标题">
+        </div>
+        <textarea id="noteContent" class="editor-only content-area" data-i18n-placeholder="app_name" placeholder="写下你的想法..."></textarea>
+        <div class="empty-state-hint" id="emptyStateHint">
+          <div class="empty-icon">📝</div>
+          <h2 data-i18n="empty_title">欢迎使用 Transition 变迁</h2>
+          <p data-i18n="empty_desc">点击左侧 "+ 新建" 创建你的第一个便签</p>
+        </div>
+
+        <div class="editor-footer">
+          <!-- 颜色选择器 -->
+          <div class="color-picker editor-only" id="colorPicker">
+            <span class="color-picker-label" data-i18n="color_palette">颜色</span>
+            <div class="color-picker-trigger" id="colorPickerTrigger">
+              <span class="current-color-dot" id="currentColorDot"></span>
+              <span class="current-color-name" id="currentColorName" data-i18n="mars_green">马尔斯绿</span>
+              <span class="color-arrow">▾</span>
+            </div>
+          </div>
+          <div class="editor-actions">
+            <button class="btn-popup editor-only" id="popupBtn" data-i18n-title="popup" title="创建桌面便签">📌</button>
+            <button class="btn-save editor-only" id="saveBtn" disabled data-i18n="save">保存</button>
+            <button class="btn-delete editor-only" id="deleteBtn" disabled data-i18n="delete">删除</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 颜色面板 (弹出) -->
+    <div class="color-panel" id="colorPanel" style="display:none;">
+      <div class="color-panel-content">
+        <div class="color-panel-header">
+          <span data-i18n="color_palette">选择颜色</span>
+          <button class="color-panel-close" id="colorPanelClose">✕</button>
+        </div>
+        <div class="color-groups" id="colorGroups">
+          <!-- 动态生成 -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="theme-utils.js"></script>
+  <script src="main.js"></script>
+
+    <!-- 密码验证遮罩 -->
+    <div class="password-overlay" id="passwordOverlay" style="display:none;">
+      <div class="password-dialog">
+        <h3 data-i18n="pw_verify_title">🔒 输入密码</h3>
+        <input type="password" id="passwordInput" data-i18n-placeholder="pw_enter" placeholder="输入密码" autofocus>
+        <p class="password-error" id="passwordError" style="display:none;" data-i18n="pw_verify_wrong">密码错误，请重试</p>
+        <div class="password-actions">
+          <button class="btn-save" id="passwordUnlockBtn" data-i18n="pw_unlock">解锁</button>
+        </div>
+      </div>
+    </div></body>
+</html>

@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title data-i18n="settings">设置 - Transition</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="glass-pane">
+    <div class="title-bar">
+      <div class="title-bar-drag"></div>
+      <span class="title-bar-text" data-i18n="settings">设置</span>
+      <div class="window-controls">
+        <button class="win-btn close" id="closeBtn" data-i18n-title="close" title="关闭">
+          <span class="icon"></span>
+        </button>
+      </div>
+    </div>
+    <div class="settings-content">
+      <section class="settings-section">
+        <h3 class="section-title" data-i18n="theme">外观</h3>
+        <div class="setting-item">
+          <label data-i18n="theme_mode">主题模式</label>
+          <div class="theme-options">
+            <button class="theme-btn" data-theme="light">
+              <span class="theme-icon">☀️</span>
+              <span data-i18n="light">浅色</span>
+            </button>
+            <button class="theme-btn" data-theme="dark">
+              <span class="theme-icon">🌙</span>
+              <span data-i18n="dark">深色</span>
+            </button>
+          </div>
+        </div>
+        <div class="setting-item setting-item-colors">
+          <label data-i18n="accent_color">主题配色</label>
+          <div class="accent-colors-row">
+            <div class="accent-color-picker" id="lightColorPicker">
+              <span class="accent-label" data-i18n="light_accent">☀️ 浅色</span>
+              <div class="accent-swatch" id="lightColorSwatch" data-color-key="lightColor">
+                <span class="accent-dot" id="lightColorDot"></span>
+                <span class="accent-name" id="lightColorName"></span>
+                <span class="color-arrow">▼</span>
+              </div>
+            </div>
+            <div class="accent-color-picker" id="darkColorPicker">
+              <span class="accent-label" data-i18n="dark_accent">🌙 深色</span>
+              <div class="accent-swatch" id="darkColorSwatch" data-color-key="darkColor">
+                <span class="accent-dot" id="darkColorDot"></span>
+                <span class="accent-name" id="darkColorName"></span>
+                <span class="color-arrow">▼</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="settings-section">
+        <h3 class="section-title" data-i18n="language">语言</h3>
+        <div class="setting-item">
+          <label data-i18n="language">语言选择</label>
+          <div class="language-options" id="languageOptions">
+            <button class="lang-btn" data-lang="zh-CN">中文</button>
+            <button class="lang-btn" data-lang="en-US">English</button>
+            <button class="lang-btn" data-lang="ja-JP">日本語</button>
+            <button class="lang-btn" data-lang="ko-KR">한국어</button>
+            <button class="lang-btn" data-lang="fr-FR">Français</button>
+            <button class="lang-btn" data-lang="de-DE">Deutsch</button>
+          </div>
+        </div>
+      </section>
+      <section class="settings-section">
+        <h3 class="section-title" data-i18n="font">全局字体</h3>
+        <div class="setting-item">
+          <label data-i18n="font">当前字体</label>
+          <span class="current-font-name" id="currentFontName">Segoe UI Variable</span>
+        </div>
+        <div class="font-section">
+          <div class="font-section-header">
+            <span class="font-section-label" data-i18n="system_fonts">系统字体</span>
+          </div>
+          <div class="font-grid" id="systemFontGrid"></div>
+        </div>
+        <div class="font-section">
+          <div class="font-section-header">
+            <span class="font-section-label" data-i18n="imported_fonts">已导入字体</span>
+            <button class="btn-import-font" id="importFontBtn" data-i18n="import_font">+ 导入字体</button>
+          </div>
+          <div class="font-grid" id="importedFontGrid">
+            <div class="font-empty-hint" id="importedEmptyHint" data-i18n="no_imported_fonts">暂无导入字体</div>
+          </div>
+        </div>
+      </section>
+      <section class="settings-section">
+        <h3 class="section-title" data-i18n="privacy">隐私与安全</h3>
+        <div class="setting-item">
+          <label data-i18n="privacy">密码保护</label>
+          <select id="privacyLevel">
+            <option value="none" data-i18n="pw_none">无密码</option>
+            <option value="remember" data-i18n="pw_remember">记住密码</option>
+            <option value="everytime" data-i18n="pw_everytime">每次输入</option>
+          </select>
+        </div>
+        <div class="setting-item" id="passwordSection" style="display:none;">
+          <label data-i18n="save">设置密码</label>
+          <div class="password-input">
+            <input type="password" id="mainPassword" data-i18n-placeholder="pw_enter" placeholder="输入密码">
+            <input type="password" id="confirmPassword" data-i18n-placeholder="pw_confirm" placeholder="确认密码">
+            <button class="btn-save-password" id="savePasswordBtn" data-i18n="save">保存</button>
+          </div>
+        </div>
+      </section>
+      <section class="settings-section">
+        <h3 class="section-title" data-i18n="reminder">行为</h3>
+        <div class="setting-item">
+          <label data-i18n="auto_launch">开机启动</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="autoLaunch">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="setting-item">
+          <label data-i18n="sound_enabled">音效提醒</label>
+          <label class="toggle-switch">
+            <input type="checkbox" id="soundEnabled" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </section>
+      <section class="settings-section">
+        <h3 class="section-title" data-i18n="about">关于</h3>
+        <div class="about-info">
+          <p data-i18n="app_name">Transition 变迁</p>
+          <p>v1.0.0</p>
+          <p class="about-desc" data-i18n="about_text">记录每一刻变迁</p>
+        </div>
+          <button class="btn-feedback" id="feedbackBtn" data-i18n="feedback">💬 反馈</button>
+      </section>
+    </div>
+  </div>
+  <div class="accent-color-panel" id="accentColorPanel" style="display:none;">
+    <div class="accent-color-panel-content">
+      <div class="accent-color-panel-header">
+        <span data-i18n="color_palette">选择配色</span>
+        <button class="accent-color-panel-close" id="accentColorPanelClose">✕</button>
+      </div>
+      <div class="color-groups" id="accentColorGroups"></div>
+    </div>
+  </div>
+  <script src="i18n.js"></script>
+  <script src="theme-utils.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>

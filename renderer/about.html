@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title data-i18n="about_title">关于 · Transition 变迁</title>
+  <style>
+    :root {
+      --mars-green: #86BAA7;
+      --glass-bg: rgba(255, 255, 255, 0.92);
+      --text-primary: #2c3e50;
+      --text-secondary: #5a6c7d;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --glass-bg: rgba(32, 36, 34, 0.95);
+        --text-primary: #E0E0E0;
+        --text-secondary: #A0A0A0;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI Variable', 'Segoe UI', 'Microsoft YaHei', sans-serif;
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      user-select: none;
+    }
+    .about-card {
+      text-align: center;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .version {
+      font-size: 14px;
+      color: var(--mars-green);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .tagline {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+  </style>
+<script src="i18n.js"></script>
+</head>
+<body>
+  <div class="about-card">
+    <h1 data-i18n="app_name">Transition 变迁</h1>
+    <div class="version">v1.0.0</div>
+    <p class="tagline" data-i18n="about_text">记录每一刻变迁</p>
+  </div>
+<script src="theme-utils.js"></script>
+<script src="about.js"></script>
+</body>
+</html>

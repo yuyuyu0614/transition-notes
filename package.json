@@ -1,0 +1,95 @@
+{
+  "name": "transition-notes",
+  "version": "1.0.0",
+  "description": "桌面便签应用",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "Transition Team",
+  "license": "MIT",
+  "dependencies": {
+    "electron-log": "^5.1.7",
+    "electron-updater": "^6.8.3",
+    "node-gyp": "^12.3.0",
+    "patch-package": "^8.0.1",
+    "sql.js": "^1.10.3"
+  },
+  "devDependencies": {
+    "electron": "^42.2.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.transition.app",
+    "productName": "Transition",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "assets/**/*",
+      "node_modules/**/*",
+      "!*.ps1",
+      "!*.mjs",
+      "!_upd.cjs",
+      "!generate_icons.py",
+      "!renderer/_fix.py",
+      "!generated-images/**"
+    ],
+    "extraResources": [
+      {
+        "from": "node_modules/sql.js/dist/sql-wasm.wasm",
+        "to": "sql-wasm.wasm"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "appx",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/transition.ico",
+      "sign": null,
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "appx": {
+      "identityName": "TransitionTeam.Transition",
+      "publisherDisplayName": "Transition Team",
+      "publisher": "CN=TransitionTeam",
+      "languages": [
+        "zh-CN",
+        "en-US",
+        "ja-JP",
+        "ko-KR",
+        "fr-FR",
+        "de-DE"
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "TransitionTeam",
+      "repo": "transition-releases"
+    },
+    "forceCodeSigning": false
+  }
+}
